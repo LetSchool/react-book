@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Semantic UI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+        <script src="./node_modules/react/dist/react.js"></script>
+        <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+        <script src="./node_modules/babel-standalone/babel.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+            function App() {
+                function handleClick() {
+                    $('.elliot')
+                        .transition('jiggle')
+                    ;
+                }
+                return (
+                    <img className="ui medium image elliot" src="./elliot.jpg" alt="" onClick={handleClick} />
+                );
+            }
+
+            ReactDOM.render (
+                <App />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

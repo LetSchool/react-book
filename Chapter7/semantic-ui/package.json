@@ -1,0 +1,30 @@
+{
+  "name": "react-book-semanticui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LetSchool/react-book-semanticui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LetSchool/react-book-semanticui/issues"
+  },
+  "homepage": "https://github.com/LetSchool/react-book-semanticui#readme",
+  "dependencies": {
+    "babel-standalone": "^6.23.1",
+    "jquery": "^3.1.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "semantic-ui": "^2.2.9"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

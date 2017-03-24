@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Semantic UI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
+
+        <script src="./node_modules/react/dist/react.js"></script>
+        <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+        <script src="./node_modules/babel-standalone/babel.js"></script>
+
+        <style media="screen">
+            body {
+                padding: 100px 45%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+            ReactDOM.render (
+                <div className="ui animated button" tabindex="0">
+                    <div className="visible content">Next</div>
+                    <div className="hidden content">
+                        <i className="right arrow icon"></i>
+                    </div>
+                </div>,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>
