@@ -1,22 +1,14 @@
 {
-  "name": "react-book-helloworld",
+  "name": "helloworld",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LetSchool/react-book-helloworld.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LetSchool/react-book-helloworld/issues"
-  },
-  "homepage": "https://github.com/LetSchool/react-book-helloworld#readme",
   "dependencies": {
     "babel-standalone": "^6.23.1",
     "react": "^15.4.2",
