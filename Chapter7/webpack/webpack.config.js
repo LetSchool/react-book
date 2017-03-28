@@ -4,19 +4,21 @@ var path = require('path');
 
 module.exports = {
     context: path.join(__dirname, 'src', 'js'),
-    entry: './appES5.js',
+    entry: './appES7.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public')
+        publicPath: '/assets/',
+        path: path.join(__dirname, 'public', 'assets')
     },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
+                enforce: 'pre',
                 loader: 'babel-loader',
-                query: {
+                options: {
                     presets: [ 'react' ]
-                }
+                },
             }
         ]
     }
