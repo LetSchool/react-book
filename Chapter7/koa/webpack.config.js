@@ -3,9 +3,9 @@ process.noDeprecation = true;
 var path = require('path');
 
 module.exports = {
-    context: path.join(__dirname, 'src', 'js'),
+    context: path.join(__dirname, 'src'),
     entry: {
-        bundle: './appES7.jsx',
+        bundle: './app.jsx',
         vendors: [
             'babel-polyfill'
 		]
