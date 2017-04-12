@@ -21,8 +21,9 @@
     "koa-static": "^3.0.0",
     "koa-views": "^6.0.1",
     "pug": "^2.0.0-beta11",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "create-react-class": "^15.5.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "webpack": "^2.3.2"
   },
   "engines": {

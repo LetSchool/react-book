@@ -1,7 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var createReactClass = require('create-react-class');
 
-var App = React.createClass({
+var App = createReactClass({
     render: function() {
         return (
             <div className="ui buttons">
