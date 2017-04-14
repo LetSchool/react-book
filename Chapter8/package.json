@@ -15,8 +15,10 @@
     "babel-preset-es2017": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
+    "config": "^1.25.1",
     "create-react-class": "^15.5.2",
     "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "koa": "^2.2.0",
     "koa-convert": "^1.2.0",
@@ -28,6 +30,7 @@
     "pug": "^2.0.0-beta11",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.2"
   },

@@ -1,13 +1,17 @@
 process.noDeprecation = true;
 
 var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     context: path.join(__dirname, 'src'),
     entry: {
         bundle: './app.jsx',
         vendors: [
-            'babel-polyfill'
+            'babel-polyfill',
+            'react',
+			'react-dom'
 		]
     },
     output: {
@@ -25,9 +29,15 @@ module.exports = {
                     presets: [ 'react', 'es2017', 'stage-0' ]
                 },
             },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    use: 'css-loader'
+                })
+            },
 			{
 				test: /\.less$/,
-				use: ['css-loader', 'less-loader']
+                use: [ "style-loader", "css-loader", "less-loader" ]
 			},
 			{
 				test: /\.png$/,
@@ -39,7 +49,15 @@ module.exports = {
 			},
         ]
     },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors' // Specify the common bundle's name.
+        })
+    ],
 	resolve: {
-        extensions: [".js", ".json", ".jsx", ".css"]
+        extensions: [".js", ".json", ".jsx", ".css"],
+        alias: {
+			Source: __dirname + '/src'
+		}
 	}
 };

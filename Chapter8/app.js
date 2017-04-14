@@ -4,6 +4,7 @@ const serve = require("koa-static")
 const Router = require('koa-router')
 const views = require('koa-views')
 const path = require('path')
+const config = require('config')
 
 const app = new Koa()
 const router = new Router()
@@ -19,6 +20,6 @@ router.get('/', async (ctx, next) => {
 
 app.use(router.routes())
 
-app.listen(3001, () => {
-	console.log("server starting on " + 3001)
+app.listen(config.server.port, () => {
+	console.log("server starting on " + config.server.port)
 })

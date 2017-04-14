@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-require('./less/theme.less')
+require('Source/less/theme.less')
 
-import LandingPage from './components/LandingPage.jsx'
+import LandingPage from 'Source/components/LandingPage.jsx'
+
+var serviceName = 'React'
 
 ReactDOM.render((
-    <LandingPage />
+    <LandingPage serviceName={serviceName} />
     ), document.querySelector('#app')
 )
