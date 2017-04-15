@@ -11,9 +11,13 @@ class Header extends React.Component {
 	}
 
 	sidebar = () => {
-		$(this.refs.sidebar)
-			.sidebar('toggle')
+		$(this.refs.sidebar).sidebar('toggle')
+	}
 
+	scollTop = () => {
+		$('html, body').stop().animate({
+			scrollTop: 0
+		}, 400)
 	}
 
 	render() {
@@ -23,18 +27,22 @@ class Header extends React.Component {
 			boxShadow: 'none'
 		}
 
+		var Items =	(
+			<div className={'item'} onClick={this.props.service}>
+				Service
+			</div>
+		)
+
 		return (
 			<div className="ui grid">
 				<div className="computer only row">
 					<div className="column">
 						<div className={'ui top fixed menu'} style={transparent}>
 							<div className={'left menu'}>
-								<div className={'item'}>
+								<div className={'item'} onClick={this.scollTop}>
 									<strong>{this.props.serviceName}</strong>
 								</div>
-								<div className={'item'}>
-									About
-								</div>
+								{Items}
 							</div>
 						</div>
 					</div>
@@ -42,7 +50,7 @@ class Header extends React.Component {
 
 				<div className="tablet only mobile only row">
 					<div className="column">
-						<div className="ui top fixed inverted menu" style={transparent}>
+						<div className="ui top fixed menu" style={transparent}>
 							<div className={'left menu'}>
 								<div className={'item'} onClick={this.sidebar}>
 									<i className="sidebar icon"></i>
@@ -51,12 +59,10 @@ class Header extends React.Component {
 						</div>
 
 						<div ref='sidebar' className="ui sidebar vertical menu">
-							<div className={'item'}>
-								&nbsp
+							<div className={'item'} onClick={this.scollTop}>
+								<strong>{this.props.serviceName}</strong>
 							</div>
-							<div className={'item'}>
-								About
-							</div>
+							{Items}
 						</div>
 						<div className="pusher"></div>
 					</div>

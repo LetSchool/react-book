@@ -22,7 +22,7 @@ class Middle extends React.Component {
 					</div>
 				</div>
 				<div className="ui basic very padded center aligned segment">
-					<button className="ui secondary basic button">Button</button>
+					<button className="ui secondary basic button" data-tooltip="Add users to your feed" data-position="top center">Button</button>
 				</div>
 			</div>
 		)
