@@ -35,18 +35,23 @@ module.exports = {
                     use: 'css-loader'
                 })
             },
-			{
+            {
 				test: /\.less$/,
-                use: [ "style-loader", "css-loader", "less-loader" ]
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader" // compiles Less to CSS
+                }]
 			},
 			{
-				test: /\.png$/,
-				use: [ "url-loader?limit=1000" ]
-			},
-			{
-				test: /\.jpg$/,
-				use: [ "url-loader?limit=1000" ]
-			},
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000
+                }
+			}
         ]
     },
     plugins: [
@@ -55,8 +60,10 @@ module.exports = {
         })
     ],
 	resolve: {
-        extensions: [".js", ".json", ".jsx", ".css"],
+        extensions: [".js", ".jsx"],
         alias: {
+            'react$': 'react/dist/react.min.js',
+            'react-dom$': 'react-dom/dist/react-dom.min.js',
 			Source: __dirname + '/src'
 		}
 	}

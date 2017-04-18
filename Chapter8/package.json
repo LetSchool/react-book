@@ -1,7 +1,7 @@
 {
-  "name": "webpack-example",
+  "name": "langingpage",
   "version": "1.0.0",
-  "description": "webpack example",
+  "description": "react studio langingpage",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
