@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom'
 class Header extends React.Component {
 	constructor(props, context) {
 		super(props, context)
-
         this.state = {
-
         }
 	}
 

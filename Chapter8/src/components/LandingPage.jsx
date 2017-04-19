@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
 		super(props, context)
 	}
 
-	about = () => {
+	design = () => {
 		var $node = $(this.refs.app_section)
 		var $header = $(ReactDOM.findDOMNode(this.refs.header))
 
@@ -52,7 +52,7 @@ class LandingPage extends React.Component {
 						</div>
 
 						<div className="ui basic center aligned segment">
-							<i className="angle down icon" style={scrollIconStyle} onClick={this.about}></i>
+							<i className="angle down icon" style={scrollIconStyle} onClick={this.design}></i>
 						</div>
 					</div>
 				</section>
