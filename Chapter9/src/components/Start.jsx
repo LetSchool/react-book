@@ -2,9 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 
-import Links from 'Source/components/Links.jsx'
-
-class Index extends React.Component {
+class Start extends React.Component {
 	constructor(props, context) {
 		super(props, context)
 	}
@@ -14,14 +12,14 @@ class Index extends React.Component {
 			<div className="ui raised segment">
 				<ul className="ui list">
 					<li>
-						<Link to="/user/leon">Designer</Link>
+						<Link to="/timer">Start</Link>
 					</li>
 				</ul>
 
-				<h1>Index</h1>
+				<h1>Get Started !</h1>
 			</div>
 		)
 	}
 }
 
-export default Index
+export default Start

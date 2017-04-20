@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 
-import Links from 'Source/components/Links.jsx'
-
 class Index extends React.Component {
 	constructor(props, context) {
 		super(props, context)
