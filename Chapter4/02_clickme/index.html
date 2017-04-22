@@ -1,1 +1,19 @@
-<button type="button" id="btn">Click Me!</button>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Test2</title>
+</head>
+<body>
+	<button type="button" id="btn">Click Me!</button> 
+
+    <script>
+		function clickedHandler() {
+			alert("I'm the button click handler.");
+		}
+		var btn = document.getElementById('btn');
+		btn.onclick = clickedHandler;
+    </script>
+</body>
+</html>
