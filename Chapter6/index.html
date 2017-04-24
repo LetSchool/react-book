@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lifecyle</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class Clock extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+                    this.state = { date: new Date() };
+                }
+
+                componentWillMount() {
+                    console.log('[MOUMT] clock will mount.');
+                }
+
+                componentDidMount() {
+                    console.log('[MOUMT] clock did mount.');
+                    console.log('        > current visitor: ' + this.props.visitor);
+                    console.log('        > set a timer to tick every second.');
+
+                    this.timerID = setInterval(() => this.tick(), 1000);
+                }
+
+                componentWillReceiveProps(nextProps, nextContext) {
+                    console.log('[ALIVE] clock will receive props.');
+                    console.log('        > next visitor: ' + nextProps.visitor);
+
+                }
+
+                shouldComponentUpdate() {
+                    let shouldUpdate = true;
+                    console.log('[ALIVE] clock should update?');
+                    console.log('        > ' + (shouldUpdate ? 'YES' : 'NO'));
+
+                    return true;
+                }
+
+                componentWillUpdate() {
+                    console.log('[ALIVE] clock will update.');
+                }
+
+                componentDidUpdate() {
+                    console.log('[ALIVE] clock did update.');
+                    console.log('        > Tick-Tock!');
+                }
+
+                componentWillUnmount() {
+                    console.log('[UNMOUNT] clock will unmount.');
+                    clearInterval(this.timerID);
+                    console.log('        > Timer is cleared.');
+                }
+
+                tick() {
+                    // 這會引發重新渲染
+                    this.setState({ date: new Date() });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <h2>Hi, {this.props.visitor}! 現在時間是: {this.state.date.toLocaleTimeString()}</h2>
+                        </div>
+                    )
+                }
+            }
+
+            var Home = (<Clock visitor='John' />);
+
+            // 初次渲染
+            ReactDOM.render (
+                Home,
+                document.getElementById("app")
+            );
+
+            // 3 秒後將 props.vistor 換成 Mary
+            setTimeout(function () {
+                Home = (<Clock visitor='Mary' />);
+
+                ReactDOM.render (
+                    Home,
+                    document.getElementById("app")
+                );
+            }, 3000);
+
+            // 6 秒後拿掉 clock 元件
+            setTimeout(function () {
+                Home = (
+                    <div>
+                        <h2>Clock is gone</h2>
+                    </div>
+                );
+
+                ReactDOM.render (
+                    Home,
+                    document.getElementById("app")
+                );
+            }, 6000);
+        </script>
+    </body>
+</html>

@@ -1,7 +1,39 @@
-<div id='top'>
-  <div id='middle'>
-    <button type="button" id="btn">
-      Click Me!
-    </button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Test4</title>
+</head>
+<body>
+    <div id='top'>
+        <div id='middle'>
+          <button type="button" id="btn">Click Me!</button>
+        </div>
+    </div>
+
+    <script>
+        var PHASE = [ '', 'CAPTURING', 'AT_TARGET', 'BUBBLING' ];
+
+        function clickedHandler(e) {
+            var eventName = e.type,
+                targetId = e.target.id,
+                currentTargetId = e.currentTarget.id,
+                phase = e.eventPhase,
+                text = "Event: " + eventName + ", Source: " + targetId + "\n" +
+                      "Phase: " + PHASE[phase] + "\n" +
+                      "Handler Executed at: " + currentTargetId;
+                    
+            alert(text);
+        }
+
+        var topDiv = document.getElementById('top'),
+            middleDiv = document.getElementById('middle'),
+            btn = document.getElementById('btn');
+            
+        topDiv.addEventListener('click', clickedHandler);
+        middleDiv.addEventListener('click', clickedHandler);
+        btn.addEventListener('click', clickedHandler);
+    </script>
+</body>
+</html>
