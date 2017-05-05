@@ -19,14 +19,17 @@ class Header extends React.Component {
 	}
 
 	render() {
-		var transparent = {
+		var transparentStyle = {
 			background: 'transparent',
 			border: 0,
 			boxShadow: 'none'
 		}
+		var cursorStyle = {
+			cursor: 'pointer'
+		}
 
 		var Items =	(
-			<div className={'item'} onClick={this.props.service}>
+			<div className={'item'} style={cursorStyle} onClick={this.props.service}>
 				Service
 			</div>
 		)
@@ -35,9 +38,9 @@ class Header extends React.Component {
 			<div className="ui grid">
 				<div className="computer only row">
 					<div className="column">
-						<div className={'ui top fixed menu'} style={transparent}>
+						<div className={'ui top fixed menu'} style={transparentStyle}>
 							<div className={'left menu'}>
-								<div className={'item'} onClick={this.scollTop}>
+								<div className={'item'} style={cursorStyle} onClick={this.scollTop}>
 									<strong>{this.props.serviceName}</strong>
 								</div>
 								{Items}
@@ -48,7 +51,7 @@ class Header extends React.Component {
 
 				<div className="tablet only mobile only row">
 					<div className="column">
-						<div className="ui top fixed menu" style={transparent}>
+						<div className="ui top fixed menu" style={transparentStyle}>
 							<div className={'left menu'}>
 								<div className={'item'} onClick={this.sidebar}>
 									<i className="sidebar icon"></i>

@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { connect  } from 'react-redux'
+
+import actions from 'Source/actions'
 
 import Header from 'Source/components/Header.jsx'
 import Footer from 'Source/components/Footer.jsx'
@@ -8,10 +11,30 @@ import Coding from 'Source/components/Coding.jsx'
 import Middle from 'Source/components/Middle.jsx'
 import Service from 'Source/components/Service.jsx'
 
+const mapStateToProps = (state) => {
+    return {
+        service: state.service
+    }
+}
+
 class LandingPage extends React.Component {
 	constructor(props, context) {
 		super(props, context)
+
+		this.state = {
+			serviceName: props.service.serviceName
+		}
 	}
+
+	componentWillMount = () => {
+        var service = this.props.dispatch(actions.service.getService())
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            serviceName: nextProps.service.serviceName
+        })
+    }
 
 	design = () => {
 		var $node = $(this.refs.app_section)
@@ -42,7 +65,7 @@ class LandingPage extends React.Component {
 
 		return (
 			<div>
-				<Header serviceName={this.props.serviceName} ref='header' service={this.service} />
+				<Header serviceName={this.state.serviceName} ref='header' service={this.service} />
 
 				<section className="ui basic vertical segment header">
 					<div className="ui container">
@@ -77,10 +100,10 @@ class LandingPage extends React.Component {
 					<Service />
 				</section>
 
-				<Footer serviceName={this.props.serviceName} />
+				<Footer serviceName={this.state.serviceName} />
 			</div>
 		)
 	}
 }
 
-export default LandingPage
+export default connect(mapStateToProps)(LandingPage)
