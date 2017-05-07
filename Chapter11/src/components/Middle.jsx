@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 
 class Middle extends React.Component {
 	render() {
 		return (
 			<div className="ui container">
 				<div className="ui basic center aligned segment">
-					<h1>TITLE</h1>
+					<h1>BLOG</h1>
 					<p>Subtitle Is Here</p>
 				</div>
 				<div className="ui stackable two column grid">
@@ -22,7 +23,7 @@ class Middle extends React.Component {
 					</div>
 				</div>
 				<div className="ui basic very padded center aligned segment">
-					<button className="ui secondary basic button" data-tooltip="Add users to your feed" data-position="top center">Button</button>
+					<Link to="/blog" className="ui secondary basic button" data-tooltip="Lets write something" data-position="top center">To Blog</Link>
 				</div>
 			</div>
 		)

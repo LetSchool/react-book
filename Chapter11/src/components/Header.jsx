@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
 	constructor(props, context) {
@@ -10,12 +11,6 @@ class Header extends React.Component {
 
 	sidebar = () => {
 		$(this.refs.sidebar).sidebar('toggle')
-	}
-
-	scollTop = () => {
-		$('html, body').stop().animate({
-			scrollTop: 0
-		}, 400)
 	}
 
 	render() {
@@ -29,9 +24,9 @@ class Header extends React.Component {
 		}
 
 		var Items =	(
-			<div className={'item'} style={cursorStyle} onClick={this.props.service}>
-				Service
-			</div>
+			<Link to="/blog" className={'item'} style={cursorStyle} onClick={this.props.service}>
+				Blog
+			</Link>
 		)
 
 		return (
@@ -40,9 +35,9 @@ class Header extends React.Component {
 					<div className="column">
 						<div className={'ui top fixed menu'} style={transparentStyle}>
 							<div className={'left menu'}>
-								<div className={'item'} style={cursorStyle} onClick={this.scollTop}>
+								<Link to="/" className={'item'} style={cursorStyle}>
 									<strong>{this.props.serviceName}</strong>
-								</div>
+								</Link>
 								{Items}
 							</div>
 						</div>
@@ -60,9 +55,9 @@ class Header extends React.Component {
 						</div>
 
 						<div ref='sidebar' className="ui sidebar vertical menu">
-							<div className={'item'} onClick={this.scollTop}>
+							<Link to="/" className={'item'}>
 								<strong>{this.props.serviceName}</strong>
-							</div>
+							</Link>
 							{Items}
 						</div>
 						<div className="pusher"></div>

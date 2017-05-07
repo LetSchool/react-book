@@ -3,10 +3,13 @@ const convert = require('koa-convert')
 const serve = require("koa-static")
 const Router = require('koa-router')
 const views = require('koa-views')
+const logger = require('koa-logger')
 const path = require('path')
 const config = require('config')
 
+
 const app = new Koa()
+app.use(logger())
 const router = new Router()
 
 // Static file path

@@ -45,15 +45,6 @@ class LandingPage extends React.Component {
 		}, 400)
 	}
 
-	service = () => {
-		var $node = $(this.refs.app_service)
-		var $header = $(ReactDOM.findDOMNode(this.refs.header))
-
-		$('html, body').stop().animate({
-			scrollTop: $node.offset().top - $header.height()
-		}, 400)
-	}
-
 	render() {
 		var scrollIconStyle = {
 			color: '#000000',
@@ -65,7 +56,7 @@ class LandingPage extends React.Component {
 
 		return (
 			<div>
-				<Header serviceName={this.state.serviceName} ref='header' service={this.service} />
+				<Header serviceName={this.state.serviceName} ref='header' />
 
 				<section className="ui basic vertical segment header">
 					<div className="ui container">
@@ -96,7 +87,7 @@ class LandingPage extends React.Component {
 					<Coding />
 				</section>
 
-				<section className="ui basic segment" ref='app_service'>
+				<section className="ui basic segment">
 					<Service />
 				</section>
 

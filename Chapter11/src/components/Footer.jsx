@@ -13,7 +13,7 @@ class Footer extends React.Component {
 		return (
 			<div className={'ui basic padded inverted center aligned segment footer'} style={ footStyle }>
 				<p><i className="mail outline icon"></i> contact@letschool.com <a href="https://www.facebook.com/LetSchool/" target="_blank" style={linkStyle}><i className="facebook icon"></i></a></p>
-				<p>Copyright &copy LetSchool. All Rights Reserved.</p>
+				<p>Copyright &copy; LetSchool. All Rights Reserved.</p>
 			</div>
 		)
 	}
