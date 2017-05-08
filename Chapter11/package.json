@@ -28,6 +28,7 @@
     "koa-views": "^6.0.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
+    "mongoose": "^4.9.8",
     "pug": "^2.0.0-beta11",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

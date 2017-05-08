@@ -7,19 +7,27 @@ const logger = require('koa-logger')
 const path = require('path')
 const config = require('config')
 
-
 const app = new Koa()
 app.use(logger())
+
 const router = new Router()
+const database = require('./database')()
 
 // Static file path
 app.use(convert(serve(path.join(__dirname, 'public'))))
 
 app.use(views(path.join(__dirname, 'views'), { extension: 'pug' }))
 
+// client
 router.get('/', async (ctx, next) => {
 	await ctx.render('index')
 })
+
+// apis
+const Blog = require('./apis/blog')
+
+router.get('/api/blog/list', Blog.list)
+router.post('/api/blog/create', Blog.create)
 
 app.use(router.routes())
 

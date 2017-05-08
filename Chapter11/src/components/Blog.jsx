@@ -10,7 +10,8 @@ import BlogWriter from 'Source/components/BlogWriter.jsx'
 
 const mapStateToProps = (state) => {
     return {
-        service: state.service
+        service: state.service,
+        blog: state.blog
     }
 }
 
@@ -19,8 +20,8 @@ class Entry extends React.Component {
 		return (
             <div className="one column row">
                 <div className="column">
-                    <h1>Man must explore, and this is exploration at its greatest</h1>
-                    <p>Problems look mighty small from 150 miles up</p>
+                    <h1>{this.props.title}</h1>
+                    <p>{this.props.content}</p>
                 </div>
             </div>
 		);
@@ -32,21 +33,38 @@ class Blog extends React.Component {
 		super(props, context)
 
 		this.state = {
-			serviceName: props.service.serviceName
+			serviceName: props.service.serviceName,
+            blog: props.blog
 		}
 	}
 
 	componentWillMount = () => {
         var service = this.props.dispatch(actions.service.getService())
+        var blog = this.props.dispatch(actions.blog.entryList())
     }
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
-            serviceName: nextProps.service.serviceName
+            serviceName: nextProps.service.serviceName,
+            blog: nextProps.blog
         })
     }
 
 	render() {
+        var entry = this.state.blog.entries.map((value, index) => {
+            if (value) {
+                return (
+                    <Entry
+                        id={value._id}
+                        title={value.title}
+                        content={value.content}
+                        updated={value.updated}
+                        key={index}
+                    />
+                )
+            }
+        })
+
 		return (
 			<div>
 				<Header serviceName={this.state.serviceName} ref='header' service={this.service} />
@@ -67,9 +85,7 @@ class Blog extends React.Component {
                             <div className="eleven wide one column computer only tablet only row">
                                 <div className="column">
                                     <div className="ui vertically divided grid">
-                                        <Entry />
-                                        <Entry />
-                                        <Entry />
+                                        {entry}
                                     </div>
 
                                     <BlogWriter />
@@ -80,9 +96,7 @@ class Blog extends React.Component {
                             <div className="one column mobile only row">
                                 <div className="column">
                                     <div className="ui vertically divided grid">
-                                        <Entry />
-                                        <Entry />
-                                        <Entry />
+                                        {entry}
                                     </div>
 
                                     <BlogWriter />

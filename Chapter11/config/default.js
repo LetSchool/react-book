@@ -5,5 +5,8 @@ module.exports = {
 	},
 	'server': {
 		'port': 3001
+	},
+	'database': {
+		'uri': 'mongodb://localhost:27017/react'
 	}
 };
