@@ -53,6 +53,7 @@ const createEntry = (conditions) => {
                 dispatch({
                     type: 'BLOG_CREATE',
                     status: 'success',
+                    _id: res.blog._id,
                     title: res.blog.title,
                     content: res.blog.content,
                     updated: res.blog.updated

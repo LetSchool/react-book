@@ -13,10 +13,21 @@ const blog = (state = initialState, action) => {
             });
 
         case 'BLOG_CREATE':
+            var entries = state.entries
+
+            if (action.status == 'success') {
+                var newEntry = {
+                    _id: action._id,
+                    title: action.title,
+                    content: action.content,
+                    updated: action.updated
+                }
+
+                entries.unshift(newEntry)
+            }
+
             return Object.assign({}, state, {
-                title: action.title,
-                content: action.content,
-                updated: action.updated
+                entries: entries
             });
 
         default:
