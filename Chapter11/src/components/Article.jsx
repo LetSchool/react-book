@@ -7,7 +7,6 @@ import actions from 'Source/actions'
 
 import Header from 'Source/components/Header.jsx'
 import Footer from 'Source/components/Footer.jsx'
-import BlogWriter from 'Source/components/BlogWriter.jsx'
 
 const mapStateToProps = (state) => {
     return {
@@ -16,27 +15,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-class Entry extends React.Component {
-	render() {
-        var linkStyle = {
-            color: 'black',
-            cursor: 'pointer'
-        }
-
-		return (
-            <div className="one column row">
-                <div className="column">
-                    <Link to={'/blog/' + this.props.id} style={linkStyle}>
-                        <h1>{this.props.title}</h1>
-                        <p>{this.props.content}</p>
-                    </Link>
-                </div>
-            </div>
-		);
-	}
-}
-
-class Blog extends React.Component {
+class Article extends React.Component {
 	constructor(props, context) {
 		super(props, context)
 
@@ -48,7 +27,9 @@ class Blog extends React.Component {
 
 	componentWillMount = () => {
         this.props.dispatch(actions.service.getService())
-        this.props.dispatch(actions.blog.entryList())
+
+        if (this.props.match.params.id)
+            this.props.dispatch(actions.blog.getArticle({ id: this.props.match.params.id }))
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -59,19 +40,15 @@ class Blog extends React.Component {
     }
 
 	render() {
-        var entry = this.state.blog.entries.map((value, index) => {
-            if (value) {
-                return (
-                    <Entry
-                        id={value._id}
-                        title={value.title}
-                        content={value.content}
-                        updated={value.updated}
-                        key={index}
-                    />
-                )
-            }
-        })
+        var title
+        var content
+        var updated
+
+        if (this.state.blog.article) {
+            title = this.state.blog.article.title
+            content = this.state.blog.article.content
+            updated = this.state.blog.article.updated
+        }
 
 		return (
 			<div>
@@ -92,23 +69,29 @@ class Blog extends React.Component {
                         <div className="ui centered grid">
                             <div className="eleven wide one column computer only tablet only row">
                                 <div className="column">
-                                    <div className="ui vertically divided grid">
-                                        {entry}
-                                    </div>
+                                    <h1>{title}</h1>
+                                    <div className="ui divider"></div>
+                                    <h3>{content}</h3>
 
-                                    <BlogWriter />
-
+                                    <div className="ui divider hidden"></div>
+                                    <div className="ui divider hidden"></div>
+                                    <p>{updated}</p>
+                                    <div className="ui divider hidden"></div>
+                                    <Link to="/blog" className="ui secondary basic button">Go Back</Link>
                                 </div>
                             </div>
 
                             <div className="one column mobile only row">
                                 <div className="column">
-                                    <div className="ui vertically divided grid">
-                                        {entry}
-                                    </div>
+                                    <h1>{title}</h1>
+                                    <div className="ui divider"></div>
+                                    <h3>{content}</h3>
 
-                                    <BlogWriter />
-
+                                    <div className="ui divider hidden"></div>
+                                    <div className="ui divider hidden"></div>
+                                    <p>{updated}</p>
+                                    <div className="ui divider hidden"></div>
+                                    <Link to="/blog" className="ui secondary basic button">Go Back</Link>
                                 </div>
                             </div>
                         </div>
@@ -121,4 +104,4 @@ class Blog extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps)(Blog)
+export default connect(mapStateToProps)(Article)

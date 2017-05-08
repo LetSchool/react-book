@@ -1,5 +1,33 @@
 const { Blog } = require('../models')
 
+const getOne = async (ctx, next) => {
+	if (!ctx.header.conditions) {
+        ctx.throw(404, 'create error')
+        return
+    }
+
+    var conditions = {}
+	try {
+		conditions = JSON.parse(ctx.header.conditions)
+	} catch(e) {
+		console.log('JSON err', e)
+	}
+
+	let blog = await Blog.findOne({_id: conditions.id}).lean().exec()
+
+	if (!blog) {
+		ctx.throw(404, 'no such blog data')
+		return
+	}
+
+    ctx.body = {
+        status: 'success',
+        blog: blog
+    }
+
+    return
+}
+
 const list = async (ctx, next) => {
 	let blog = await Blog.find().sort( { updated: -1 } ).lean().exec()
 
@@ -67,6 +95,7 @@ const create = async (ctx, next) => {
 }
 
 module.exports = {
+	getOne: getOne,
 	list: list,
     create: create
 }

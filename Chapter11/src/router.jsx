@@ -1,5 +1,6 @@
 import LandingPage from 'Source/components/LandingPage.jsx'
 import Blog from 'Source/components/Blog.jsx'
+import Article from 'Source/components/Article.jsx'
 
 const routes = [
     {
@@ -11,6 +12,11 @@ const routes = [
         path: '/blog',
         exact: true,
         component: Blog
+    },
+    {
+        path: '/blog/:id',
+        exact: true,
+        component: Article
     }
 ]
 

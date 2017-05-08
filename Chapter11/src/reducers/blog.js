@@ -1,12 +1,15 @@
 const initialState = {
     status: 'normal',
-	title: null,
-	content: null,
-    updated: null,
-    entries: []
+    entries: [],
+    article: null
 }
 const blog = (state = initialState, action) => {
     switch (action.type) {
+        case 'BLOG_GET':
+            return Object.assign({}, state, {
+                article: action.article
+            });
+
         case 'BLOG_LIST':
             return Object.assign({}, state, {
                 entries: action.entries

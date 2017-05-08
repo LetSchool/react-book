@@ -26,6 +26,7 @@ router.get('/', async (ctx, next) => {
 // apis
 const Blog = require('./apis/blog')
 
+router.get('/api/blog/get', Blog.getOne)
 router.get('/api/blog/list', Blog.list)
 router.post('/api/blog/create', Blog.create)
 
