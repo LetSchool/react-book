@@ -5,7 +5,7 @@ const routes = [
     {
         path: '/',
         exact: true,
-        component: Blog
+        component: LandingPage
     },
     {
         path: '/blog',
