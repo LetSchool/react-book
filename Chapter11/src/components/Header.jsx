@@ -24,7 +24,7 @@ class Header extends React.Component {
 		}
 
 		var Items =	(
-			<Link to="/blog" className={'item'} style={cursorStyle} onClick={this.props.service}>
+			<Link to="/blog" className={'item'} style={cursorStyle}>
 				Blog
 			</Link>
 		)
