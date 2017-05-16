@@ -13,7 +13,7 @@ const getOne = async (ctx, next) => {
 		console.log('JSON err', e)
 	}
 
-	let blog = await Blog.findOne({_id: conditions.id}).lean().exec()
+	let blog = await Blog.findOne( { _id: conditions.id } ).lean().exec()
 
 	if (!blog) {
 		ctx.throw(404, 'no such blog data')
@@ -54,19 +54,14 @@ const exists = async (title) => {
 }
 
 const create = async (ctx, next) => {
-    if (!ctx.header.conditions) {
+    if (!ctx.request.body) {
         ctx.throw(404, 'create error')
         return
     }
 
-    var conditions = {}
-	try {
-		conditions = JSON.parse(ctx.header.conditions)
-	} catch(e) {
-		console.log('JSON err', e)
-	}
+    var payload = ctx.request.body
 
-    let exits = await exists(conditions.title)
+    let exits = await exists(payload.title)
     if (exits) {
         ctx.body = {
             status: 'title exits'
@@ -75,20 +70,22 @@ const create = async (ctx, next) => {
     }
 
     var data = {
-        title: conditions.title,
-		content: conditions.content
+        title: payload.title,
+		content: payload.content
 	}
     var _blog = new Blog(data)
-    var err
+    var error
 
-    _blog.save(function(err) {
-        console.log(err)
+    _blog.save((err) => {
+        error = err
     })
-    if (err) {
-        ctx.throw(404, 'create error')
+
+    if (error) {
+        ctx.throw(404, 'create error' + error)
         return
     }
-    ctx.body = {
+
+	ctx.body = {
         status: 'success',
         blog: _blog.toObject()
     }

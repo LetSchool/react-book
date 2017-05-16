@@ -7,8 +7,7 @@ const entryList = (conditions) => {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'conditions': {}
+                    'Content-Type': 'application/json'
                 }
             })
 
@@ -27,7 +26,7 @@ const entryList = (conditions) => {
                 })
             }
         } catch(error) {
-            console.error(error)
+            console.error('error', error)
         }
     }
 }
@@ -61,7 +60,7 @@ const getArticle = (conditions) => {
                 })
             }
         } catch(error) {
-            console.error(error)
+            console.error('error', error)
         }
     }
 }
@@ -74,11 +73,11 @@ const createEntry = (conditions) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'conditions': JSON.stringify({
-                        title: conditions.title || undefined,
-                        content: conditions.content || undefined
-                    })
-                }
+                },
+                body: JSON.stringify({
+                    title: conditions.title || undefined,
+                    content: conditions.content || undefined
+                })
             })
 
             let res = await response.json()
@@ -99,7 +98,7 @@ const createEntry = (conditions) => {
                 })
             }
         } catch(error) {
-            console.error(error)
+            console.error('error', error)
         }
     }
 }
