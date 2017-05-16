@@ -3,6 +3,7 @@ const initialState = {
     entries: [],
     article: null
 }
+
 const blog = (state = initialState, action) => {
     switch (action.type) {
         case 'BLOG_GET':
@@ -37,4 +38,5 @@ const blog = (state = initialState, action) => {
             return state
     }
 }
+
 export default blog

@@ -1,6 +1,7 @@
 const initialState = {
 	serviceName: null
 }
+
 const service = (state = initialState, action) => {
     switch (action.type) {
         case 'SERVICE_DATA':
@@ -12,4 +13,5 @@ const service = (state = initialState, action) => {
             return state
     }
 }
+
 export default service

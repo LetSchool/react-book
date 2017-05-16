@@ -1,6 +1,6 @@
 var config = require('../../config/default.js')
 
-const getService = (conditions) => {
+const getService = () => {
     return async (dispatch, getState) => {
         dispatch({
             type: 'SERVICE_DATA',
