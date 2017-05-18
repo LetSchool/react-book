@@ -8,11 +8,13 @@ const blog = (state = initialState, action) => {
     switch (action.type) {
         case 'BLOG_GET':
             return Object.assign({}, state, {
+                status: 'normal',
                 article: action.article
             });
 
         case 'BLOG_LIST':
             return Object.assign({}, state, {
+                status: 'normal',
                 entries: action.entries
             });
 
@@ -31,7 +33,13 @@ const blog = (state = initialState, action) => {
             }
 
             return Object.assign({}, state, {
+                status: 'create success',
                 entries: entries
+            });
+
+        case 'BLOG_DELETE':
+            return Object.assign({}, state, {
+                status: 'delete success',
             });
 
         default:

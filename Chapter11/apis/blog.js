@@ -1,19 +1,14 @@
 const { Blog } = require('../models')
 
 const getOne = async (ctx, next) => {
-	if (!ctx.header.conditions) {
+	if (!ctx.params.entryid) {
         ctx.throw(404, 'create error')
         return
     }
 
-    var conditions = {}
-	try {
-		conditions = JSON.parse(ctx.header.conditions)
-	} catch(e) {
-		console.log('JSON err', e)
-	}
+    var entryid = ctx.params.entryid
 
-	let blog = await Blog.findOne( { _id: conditions.id } ).lean().exec()
+	let blog = await Blog.findOne( { _id: entryid } ).lean().exec()
 
 	if (!blog) {
 		ctx.throw(404, 'no such blog data')
@@ -24,8 +19,6 @@ const getOne = async (ctx, next) => {
         status: 'success',
         blog: blog
     }
-
-    return
 }
 
 const list = async (ctx, next) => {
@@ -40,8 +33,6 @@ const list = async (ctx, next) => {
         status: 'success',
         blog: blog
     }
-
-    return
 }
 
 const exists = async (title) => {
@@ -91,8 +82,32 @@ const create = async (ctx, next) => {
     }
 }
 
+const deleteOne = async (ctx, next) => {
+	if (!ctx.params.entryid) {
+        ctx.throw(404, 'delete error')
+        return
+    }
+
+    var entryid = ctx.params.entryid
+	var error
+
+	await Blog.remove({ _id: entryid }, (err) => {
+		error = err
+	});
+
+	if (error) {
+		ctx.throw(404, 'no such blog data')
+		return
+	}
+
+    ctx.body = {
+        status: 'success'
+    }
+}
+
 module.exports = {
 	getOne: getOne,
 	list: list,
-    create: create
+    create: create,
+	deleteOne: deleteOne
 }
