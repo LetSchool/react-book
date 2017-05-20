@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect  } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import actions from 'Source/actions'
 
@@ -12,6 +12,25 @@ const mapStateToProps = (state) => {
     return {
         service: state.service,
         blog: state.blog
+    }
+}
+
+class ArticleContent extends React.Component {
+    render() {
+		return (
+            <div className="column">
+                <h1>{this.props.title}</h1>
+                <div className="ui divider"></div>
+                <h3>{this.props.content}</h3>
+
+                <div className="ui divider hidden"></div>
+                <div className="ui divider hidden"></div>
+                <p>{this.props.updated}</p>
+                <div className="ui divider hidden"></div>
+                <Link to="/blog" className="ui secondary basic button">Go Back</Link>
+                <div className="ui red basic button" onClick={this.props.delete}>Delete</div>
+            </div>
+        )
     }
 }
 
@@ -39,16 +58,35 @@ class Article extends React.Component {
         })
     }
 
+    delete = () => {
+        if (!this.props.match.params.id)
+            return
+
+        var conditions = {
+            id: this.props.match.params.id
+        }
+
+        this.props.dispatch(actions.blog.deleteEntry(conditions))
+    }
+
 	render() {
-        var title
-        var content
-        var updated
+        var entryid,
+            title,
+            content,
+            updated
 
         if (this.state.blog.article) {
+            entryid = this.state.blog.article._id
             title = this.state.blog.article.title
             content = this.state.blog.article.content
             updated = this.state.blog.article.updated
         }
+
+        if (this.state.blog.status == 'delete success') {
+			return (
+				<Redirect to={'/blog'} />
+			)
+		}
 
 		return (
 			<div>
@@ -68,31 +106,11 @@ class Article extends React.Component {
                     <div className="ui container">
                         <div className="ui centered grid">
                             <div className="eleven wide one column computer only tablet only row">
-                                <div className="column">
-                                    <h1>{title}</h1>
-                                    <div className="ui divider"></div>
-                                    <h3>{content}</h3>
-
-                                    <div className="ui divider hidden"></div>
-                                    <div className="ui divider hidden"></div>
-                                    <p>{updated}</p>
-                                    <div className="ui divider hidden"></div>
-                                    <Link to="/blog" className="ui secondary basic button">Go Back</Link>
-                                </div>
+                                <ArticleContent delete={this.delete} title={title} content={content} updated={updated} />
                             </div>
 
                             <div className="one column mobile only row">
-                                <div className="column">
-                                    <h1>{title}</h1>
-                                    <div className="ui divider"></div>
-                                    <h3>{content}</h3>
-
-                                    <div className="ui divider hidden"></div>
-                                    <div className="ui divider hidden"></div>
-                                    <p>{updated}</p>
-                                    <div className="ui divider hidden"></div>
-                                    <Link to="/blog" className="ui secondary basic button">Go Back</Link>
-                                </div>
+                                <ArticleContent delete={this.delete} title={title} content={content} updated={updated} />
                             </div>
                         </div>
                     </div>

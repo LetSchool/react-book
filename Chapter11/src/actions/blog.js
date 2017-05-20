@@ -34,14 +34,11 @@ const entryList = (conditions) => {
 const getArticle = (conditions) => {
     return async (dispatch, getState) => {
         try {
-            let response = await fetch(config.service.external_url + '/api/blog/get', {
+            let response = await fetch(config.service.external_url + '/api/blog/entry/' + conditions.id, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'conditions': JSON.stringify({
-                        id: conditions.id || undefined
-                    })
+                    'Content-Type': 'application/json'
                 }
             })
 
@@ -103,8 +100,39 @@ const createEntry = (conditions) => {
     }
 }
 
+const deleteEntry = (conditions) => {
+    return async (dispatch, getState) => {
+        try {
+            let response = await fetch(config.service.external_url + '/api/blog/entry/' + conditions.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            let res = await response.json()
+
+            if (res.status == 'success') {
+                dispatch({
+                    type: 'BLOG_DELETE',
+                    status: 'success'
+                })
+            }else {
+                dispatch({
+                    type: 'BLOG_DELETE',
+                    status: 'error'
+                })
+            }
+        } catch(error) {
+            console.error('error', error)
+        }
+    }
+}
+
 export default {
 	entryList,
     createEntry,
-    getArticle
+    getArticle,
+    deleteEntry
 }
