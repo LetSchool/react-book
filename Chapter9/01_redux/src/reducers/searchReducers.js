@@ -1,8 +1,8 @@
-const SEARCH_TODO = 'SEARCH_TODO'
+const CHANGE_SEARCH_INPUT = 'CHANGE_SEARCH_INPUT'
 
 function search(state = '', action) {
   switch (action.type) {
-    case SEARCH_TODO:
+    case CHANGE_SEARCH_INPUT:
       return action.text
 
     default:

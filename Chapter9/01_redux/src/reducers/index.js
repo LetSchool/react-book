@@ -4,8 +4,8 @@ import todos from './todoReducers.js'
 import search from './searchReducers.js'
 
 const todoApp = combineReducers({
-  todos,
-  search
+  todos: todos,
+  search: search
 })
 
 export default todoApp
