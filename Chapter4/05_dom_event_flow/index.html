@@ -15,7 +15,7 @@
     <script>
         var PHASE = [ '', 'CAPTURING', 'AT_TARGET', 'BUBBLING' ];
 
-        function clickedHandler(e) {
+        function clickHandler(e) {
             var eventName = e.type,
                 targetId = e.target.id,
                 currentTargetId = e.currentTarget.id,
@@ -31,9 +31,9 @@
             middleDiv = document.getElementById('middle'),
             btn = document.getElementById('btn');
 
-        topDiv.addEventListener('click', clickedHandler, true);
-        middleDiv.addEventListener('click', clickedHandler, true);
-        btn.addEventListener('click', clickedHandler);
+        topDiv.addEventListener('click', clickHandler, true);
+        middleDiv.addEventListener('click', clickHandler, true);
+        btn.addEventListener('click', clickHandler);
     </script>
 </body>
 </html>
