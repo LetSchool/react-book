@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Bind this in constructor</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class SayHello extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {message: 'Hello!'};
+                    this.handleClick = this.handleClick.bind(this);
+                 }
+        
+                handleClick() {
+                    alert(this.state.message);
+                }
+
+                render() {
+                    return (
+                        <button onClick={this.handleClick}>
+                            Say Hello
+                        </button>
+                    );
+                }
+            }
+
+            ReactDOM.render (
+                <SayHello />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

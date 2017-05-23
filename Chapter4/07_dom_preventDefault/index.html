@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Propagation</title>
+</head>
+<body>
+    <form>
+        <input type="text" id="my-textbox" /> 
+    </form>
+
+
+    <script>
+        function checkName(event) {
+            var charCode = event.charCode;
+
+            if (charCode != 0) {
+                if (charCode < 97 || charCode > 122) {
+                    if (event.preventDefault)
+                        event.preventDefault();
+                    else
+                        event.returnValue = true;
+
+                    alert("Please use lowercase letters only." + "\n" + "charCode: " + charCode + "\n");
+                }
+            }
+        }
+
+        var myTextbox = document.getElementById('my-textbox');
+        myTextbox.addEventListener('keypress', checkName, false);
+    </script>
+</body>
+</html>

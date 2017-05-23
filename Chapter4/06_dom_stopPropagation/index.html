@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Propagation</title>
+</head>
+<body>
+    <div id='top'>
+        <div id='middle'>
+          <button type="button" id="btn">Click Me!</button>
+        </div>
+    </div>
+
+    <script>
+        function clickHandler() {
+            // will not execute
+            alert("click handler triggered at middleDiv and topDiv.");
+        }
+
+        var topDiv = document.getElementById('top'),
+            middleDiv = document.getElementById('middle'),
+            btn = document.getElementById('btn');
+
+        topDiv.addEventListener('click', clickHandler);
+        middleDiv.addEventListener('click', clickHandler);
+
+        btn.onclick = function(event) {
+            alert("click handler triggered at button.");
+
+            event  = event || window.event;
+            var src = event.target || evet.srcElement;
+
+            if (event.stopPropagation)
+                event.stopPropagation();
+            else
+                event.cancelBubble = true;
+        };
+    </script>
+</body>
+</html>
