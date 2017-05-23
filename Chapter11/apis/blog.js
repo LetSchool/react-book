@@ -3,16 +3,14 @@ const { Blog } = require('../models')
 const getOne = async (ctx, next) => {
 	if (!ctx.params.entryid) {
         ctx.throw(404, 'create error')
-        return
     }
 
     var entryid = ctx.params.entryid
 
-	let blog = await Blog.findOne( { _id: entryid } ).lean().exec()
+	let blog = await Blog.findOne( { _id: entryid } ).lean()
 
 	if (!blog) {
 		ctx.throw(404, 'no such blog data')
-		return
 	}
 
     ctx.body = {
@@ -22,11 +20,10 @@ const getOne = async (ctx, next) => {
 }
 
 const list = async (ctx, next) => {
-	let blog = await Blog.find().sort( { updated: -1 } ).lean().exec()
+	let blog = await Blog.find().sort( { updated: -1 } ).lean()
 
 	if (!blog.length) {
 		ctx.throw(404, 'no such blog data')
-		return
 	}
 
     ctx.body = {
@@ -36,7 +33,7 @@ const list = async (ctx, next) => {
 }
 
 const exists = async (title) => {
-	let blog = await Blog.find({title: title}).lean().exec()
+	let blog = await Blog.find({title: title}).lean()
 
     if (!blog.length)
         return false
@@ -47,7 +44,6 @@ const exists = async (title) => {
 const create = async (ctx, next) => {
     if (!ctx.request.body) {
         ctx.throw(404, 'create error')
-        return
     }
 
     var payload = ctx.request.body
@@ -73,7 +69,6 @@ const create = async (ctx, next) => {
 
     if (error) {
         ctx.throw(404, 'create error' + error)
-        return
     }
 
 	ctx.body = {
@@ -97,7 +92,6 @@ const deleteOne = async (ctx, next) => {
 
 	if (error) {
 		ctx.throw(404, 'no such blog data')
-		return
 	}
 
     ctx.body = {
