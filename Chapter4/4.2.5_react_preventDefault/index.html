@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Stop Propagation in React</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MyButton extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.handleClick = this.handleClick.bind(this);
+                 }
+
+                handleClick(event) {
+                    alert("This link was clicked.");
+                    event.preventDefault();
+                }
+
+                render() {
+                    return (
+                        <a href="http://www.google.com" onClick={this.handleClick}>
+                            Click Me
+                        </a>
+                    );
+                }
+            }
+
+            ReactDOM.render (
+                <MyButton />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>
