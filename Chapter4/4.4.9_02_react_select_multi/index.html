@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React select menu (single)</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class FlavorForm extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {value: [ 'coconut' ]};
+
+                    this.handleChange = this.handleChange.bind(this);
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                }
+
+                handleChange(event) {
+                    let selectedFlavors = [];
+                    let sel = event.target;
+
+                    for (let i = 0; i < sel.length; i++) {
+                        let opt = sel.options[i];
+                        if (opt.selected)
+                            selectedFlavors.push(opt.value);
+                    }
+
+                    this.setState({value: selectedFlavors});
+                }
+
+                handleSubmit(event) {
+                    alert('Your favorite flavors are ' + this.state.value);
+                    event.preventDefault();
+                }
+
+                render() {
+                    return (
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                            Pick your favorite La Croix flavors:
+                            <select multiple={true}
+                                    value={this.state.value}
+                                    onChange={this.handleChange}>
+                                <option value="grapefruit">Grapfruit</option>
+                                <option value="lime">Lime</option>
+                                <option value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                            </select>
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    );
+                }
+            }
+
+            ReactDOM.render (
+                <FlavorForm />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React checkbox input</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MyCheckboxInput extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {favFood: [ 'sandwich' ]};
+                    this.handleChange = this.handleChange.bind(this);
+                }
+                
+                handleChange(event) {
+                    const { checked, value } = event.target;
+                    let favFood = this.state.favFood;
+
+                    if (checked && favFood.indexOf(value) === -1)
+                        favFood.push(value);
+                    else
+                        favFood = favFood.filter(item => item !== value);
+
+                    this.setState({favFood: favFood});
+                }
+
+                render() {
+                    let favFood = this.state.favFood;
+
+                    return (
+                        <div>
+                            <label>sandwich
+                                <input type="checkbox"
+                                       value="sandwich"
+                                       checked={favFood.indexOf('sandwich') !== -1}
+                                       onChange={this.handleChange} />
+                            </label>
+                            <label>rice
+                                <input type="checkbox"
+                                       value="rice"
+                                       checked={favFood.indexOf('rice') !== -1}
+                                       onChange={this.handleChange} />
+                            </label>
+                            <label>noodle
+                                <input type="checkbox"
+                                       value="noodle"
+                                       checked={favFood.indexOf('noodle') !== -1}
+                                       onChange={this.handleChange} />
+                            </label>
+                        </div>
+                    );
+                }
+            }
+
+
+            ReactDOM.render (
+                <MyCheckboxInput />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

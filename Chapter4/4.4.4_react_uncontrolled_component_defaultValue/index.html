@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React uncontrolled component - defaultValue</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MyInputForm extends React.Component {
+                constructor(props) {
+                    super(props);
+
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                }
+
+                handleSubmit(event) {
+                    const text = this.textInput.value;
+                    alert("Text: " + text + " is submitted");
+                    event.preventDefault();
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                            <label>Text:
+                                <input type="text"
+                                       defaultValue="Hello World"
+                                       ref={(input) => this.textInput = input} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                            </form>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render (
+                <MyInputForm />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

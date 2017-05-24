@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React controlled component - make text to upper case</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MyInputForm extends React.Component {
+                 constructor(props) {
+                    super(props);
+                    this.state = {text: ''};
+
+                    this.handleTextChange = this.handleTextChange.bind(this);
+                 }
+
+                handleTextChange(event) {
+                    this.setState({text: event.target.value.toUpperCase()});
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <input type="text"
+                                value={this.state.text}
+                                onChange={this.handleTextChange} />
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render (
+                <MyInputForm />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>
