@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MessageBox extends React.Component {
+                getChildContext() {
+                    return {color: "green"};
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <p>Please enter a message</p>
+                            <Message />
+                        </div>                    
+                    ) 
+                }
+            };
+
+            MessageBox.childContextTypes = {
+              color: PropTypes.string
+            };
+
+            class Message extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <form>
+                                <input type="text" name="message" />
+                            </form>
+                            <Button />
+                        </div>
+                    ) 
+                }
+            };
+
+            class Button extends React.Component {
+                render() {
+                    return (
+                        <button style={{background: this.context.color}}>
+                            Send
+                        </button>
+                    ) 
+                }
+            };
+
+            Button.contextTypes = {
+              color: PropTypes.string
+            };
+
+            ReactDOM.render(
+                <MessageBox />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

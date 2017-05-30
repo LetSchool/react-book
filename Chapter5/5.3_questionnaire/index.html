@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            var questions = [
+                {
+                    "question": "性別",
+                    "options": ["男", "女"]
+                },
+                {
+                    "question": "年齡",
+                    "options": ["18歲以下", "18~25歲", "26~35歲", "35歲以上"]
+                },
+                {
+                    "question": "婚姻狀況",
+                    "options": ["未婚", "已婚"]
+                }
+            ];
+
+
+            class Questionnaire extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <QuesTitle />
+                            <QuesList questions={questions}/>
+                        </div>
+                    );
+                }
+            };
+
+
+            class QuesTitle extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <h1>問卷調查表</h1>
+                            <small>0 項問題待填寫</small>
+                        </div>
+                    );
+                }
+            };
+
+
+            class QuesList extends React.Component {
+                render() {
+                    var quesItems = this.props.questions.map(function (quesInfo, i) {
+                        return (
+                            <QuesItem 
+                                key={i}
+                                question={quesInfo.question} 
+                                options={quesInfo.options}
+                            />
+                        )
+                    });
+
+                    return (
+                        <div>
+                            <p>請撥冗填寫本問卷，提供寶貴的資訊，謝謝!</p>
+                            <ul>
+                                {quesItems}
+                            </ul>
+                        </div>
+                    );
+                }
+            };
+
+            QuesList.defaultProps = {
+                questions: []
+            };
+
+
+            class QuesItem extends React.Component {
+                generateOpts() {
+                    return this.props.options.map(function (option, i) {
+                        return ( 
+                            <label key={"option" + i}>
+                                <input type="radio"/> {option}
+                            </label>
+                        );
+                    });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <li>{this.props.question}</li>
+                                {this.generateOpts()}
+                        </div>
+                    )
+                }
+            };
+
+            ReactDOM.render(
+                <Questionnaire />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

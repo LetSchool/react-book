@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+        <script src="https://unpkg.com/pubsubjs@0.3.9/pubsub.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            const pubsub = Pubsub.create();
+
+            class MessageBox extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.state = { messages: []}
+                }
+                
+                componentDidMount() {
+                    const self = this;
+                    this.token = pubsub.subscribe('addMsg', function(context, msg) {
+                        self.state.messages.push(msg);
+                        self.setState({ messages: self.state.messages});
+                    });
+                }
+
+                componentWillUnmount() {
+                    pubsub.unsubscribe(this.token);
+                }
+
+                render() {
+                    const msgField = this.state.messages.map(function (msg, i) {
+                        return <p key={"msg" + i}>{msg}</p>
+                    });
+
+                    return (
+                        <div>
+                            <div>{msgField}</div>
+                            <p>Please enter a message</p>
+                            <Message />
+                        </div>                    
+                    )
+                }
+            };
+
+            class Message extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.state = { message: '' };
+                    this.handleChange = this.handleChange.bind(this);
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                }
+
+                handleChange(event) {
+                    this.setState({message: event.target.value});
+                }
+
+                handleSubmit(evt) {
+                    evt.preventDefault();
+                    pubsub.publish('addMsg', null, this.state.message);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                                <input type="text" 
+                                        value={this.state.message} 
+                                        onChange={this.handleChange} 
+                                />
+                                <input type="submit" value="Enter" />
+                            </form>
+                        </div>
+                    ) 
+                }
+            };
+
+            ReactDOM.render(
+                <MessageBox />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

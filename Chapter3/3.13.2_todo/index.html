@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+</head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class TodoApp extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.state = {
+                        text: '',
+                        items: []
+                    };
+
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                    this.handleChange = this.handleChange.bind(this);
+                }
+
+                handleSubmit(event) {
+                    event.preventDefault();
+                    this.setState({
+                        items: [
+                            ...this.state.items,
+                            this.state.text
+                        ]
+                    });
+                }
+
+                handleChange(event) {
+                    this.setState({
+                        text: event.target.value
+                    });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <h3>TODO</h3>
+                            <InputField 
+                                handleSubmit={this.handleSubmit}
+                                handleChange={this.handleChange}
+                                text={this.state.text} 
+                            />
+                            <TodoList items={this.state.items}/>
+                        </div>
+                    );
+                }
+            };
+
+            class InputField extends React.Component {
+                render() {
+                    return (
+                        <form onSubmit={this.props.handleSubmit}>
+                            <input onChange={this.props.handleChange}
+                                   value={this.props.text}
+                            />
+                            <button>Add</button>
+                        </form>
+                    );
+                }
+            };
+
+            class TodoList extends React.Component {
+                render() {
+                    let count = 0;
+                    let todoItems = [];
+
+                    this.props.items.forEach(function (item) {
+                        count += 1;
+
+                        todoItems.push(
+                            <TodoItem key={count} todoitem={item} />
+                        )
+                    });
+
+                    return (
+                        <div> {todoItems} </div>
+                    );
+                }
+            };
+
+            class TodoItem extends React.Component {
+                render() {
+                    return (
+                        <li> {this.props.todoitem} </li>
+                    );
+                }
+            };
+
+            ReactDOM.render(
+                <TodoApp />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

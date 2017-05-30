@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class Questionnaire extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <QuesTitle />
+                            <QuesList />
+                        </div>
+                    );
+                }
+            };
+
+
+            class QuesTitle extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <h1>問卷調查表</h1>
+                            <small>0 項問題待填寫</small>
+                        </div>
+                    );
+                }
+            };
+
+            class QuesList extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <p>請撥冗填寫本問卷，提供寶貴的資訊，謝謝!</p>
+                            <ul>
+                                <li>性別</li>
+                                    <label>
+                                        <input type="radio"/> 男
+                                    </label>
+                                    <label>
+                                        <input type="radio"/> 女
+                                    </label>
+                                <li>年齡</li>
+                                    <label>
+                                        <input type="radio"/> 18歲以下
+                                    </label>
+                                    <label>
+                                        <input type="radio"/> 18~25歲
+                                    </label>
+                                    <label>
+                                        <input type="radio"/> 26~35歲
+                                    </label>
+                                    <label>
+                                        <input type="radio"/> 35歲以上
+                                    </label>
+                                <li>婚姻狀況</li>
+                                    <label>
+                                        <input type="radio"/> 未婚
+                                    </label>
+                                    <label>
+                                        <input type="radio"/> 已婚
+                                    </label>
+                            </ul>
+                        </div>
+                    );
+                }
+            };
+
+            ReactDOM.render(
+                <Questionnaire />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

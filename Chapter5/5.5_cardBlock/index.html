@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class MyApp extends React.Component {
+                render() {
+                    return (
+                        <CardBlock>
+                            <Card content="This is card A." />
+                            <Card content="This is card B." />
+                            <Card content="This is card C." />
+                        </CardBlock>
+                    )   
+                }
+            }
+
+            class CardBlock extends React.Component {
+                render() {
+                    const childrenWithNewStyle = React.Children.map(this.props.children, function(child){
+                        return React.cloneElement(child, {
+                            fontColor: "red"
+                          });
+                    });
+
+                    return (
+                        <div>
+                            {childrenWithNewStyle}
+                        </div>
+                    )
+                }
+            }
+
+
+            class Card extends React.Component {
+                render() {
+                    const cardStyle = {
+                        width: "50x",
+                        height: "30px",
+                        marginBottom: "20px",
+                        backgroundColor: "gray",
+                        color: this.props.fontColor
+                    };
+
+                    return <div style={cardStyle}>{this.props.content}</div>
+                }
+            }
+
+            ReactDOM.render(
+                <MyApp />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

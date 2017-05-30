@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+</head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class Card extends React.Component {
+                render() {
+                    const cardStyle = {
+                        width: "250px",
+                        height: "150px",
+                        marginBottom: "20px",
+                        backgroundColor: "gray"
+                    };
+
+                    return (
+                        <div style={cardStyle}>It is a card.</div>
+                    );
+                }
+            };
+
+            ReactDOM.render(
+                <Card />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

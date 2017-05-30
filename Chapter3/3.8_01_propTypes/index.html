@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+</head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            class Greeting extends React.Component {
+                render() {
+                    return (
+                        <h1>Hello {this.props.name}</h1>
+                    );
+                }
+            }
+
+            Greeting.propTypes = {
+                name: PropTypes.string.isRequired
+            }
+
+            ReactDOM.render(
+                <Greeting name="Amy" />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>

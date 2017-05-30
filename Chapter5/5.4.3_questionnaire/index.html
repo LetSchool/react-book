@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+            var questions = [
+                {
+                    "question": "性別",
+                    "options": ["男", "女"]
+                },
+                {
+                    "question": "年齡",
+                    "options": ["18歲以下", "18~25歲", "26~35歲", "35歲以上"]
+                },
+                {
+                    "question": "婚姻狀況",
+                    "options": ["未婚", "已婚"]
+                }
+            ];
+
+
+            class Questionnaire extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.state = {
+                        toAnswer: questions.length
+                    }
+                    this.answerHandler = this.answerHandler.bind(this);
+                }
+
+                answerHandler(ans) {
+                    this.setState({
+                        toAnswer: ans
+                    });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <QuesTitle toAnswer={this.state.toAnswer}/>
+                            <QuesList questions={questions}   
+                                             answerHandler={this.answerHandler}
+                             />
+                        </div>
+                    );
+                }
+            };
+
+
+
+            class QuesTitle extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <h1>問卷調查表</h1>
+                            <small>{this.props.toAnswer} 項問題待填寫</small>
+                        </div>
+                    );
+                }
+            };
+
+            class QuesList extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.state = {
+                        answered: 0
+                    }
+                    this.handleAnswer = this.handleAnswer.bind(this);
+                }
+
+                handleAnswer() {
+                    var newAnswered = this.state.answered + 1,
+                        toAnswer = this.props.questions.length - newAnswered;
+
+                    this.setState({ answered: newAnswered });
+                    this.props.answerHandler(toAnswer);
+                }
+
+
+                render() {
+                    const self = this;
+                    var quesItems = this.props.questions.map(function (quesInfo, i) {
+                        return (
+                            <QuesItem 
+                                key={i}
+                                question={quesInfo.question} 
+                                options={quesInfo.options}
+                                handleAnswer={self.handleAnswer}
+                            />
+                        )
+                    });
+
+                    return (
+                        <div>
+                            <p>請撥冗填寫本問卷，提供寶貴的資訊，謝謝!</p>
+                            <ul>
+                                {quesItems}
+                            </ul>
+                        </div>
+                    );
+                }
+            };
+
+            QuesList.defaultProps = {
+                questions: []
+            };
+
+
+            class QuesItem extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.onChange = this.onChange.bind(this);
+                    this.state = {
+                        option: ''
+                    }
+                }
+
+                 onChange(option) {
+                    if (this.state.option === '')
+                        this.props.handleAnswer();
+                        
+                    this.setState({ option: option });
+                } 
+
+
+                generateOpts() {
+                    const self = this;
+
+                    return this.props.options.map(function (option, i) {
+                        return ( 
+                            <RadioInput 
+                                key={"option" + i}
+                                option={option}
+                                checked={self.state.option === option}
+                                onChange={self.onChange}
+                            />
+                        );
+                    });
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <li>{this.props.question}</li>
+                                {this.generateOpts()}
+                        </div>
+                    )
+                }
+            };
+
+            class RadioInput extends React.Component {
+                constructor(props, context) {
+                    super(props, context);
+
+                    this.handleChange = this.handleChange.bind(this);
+                }
+
+                handleChange(evt) {
+                    var checked = evt.target.checked;
+
+                    if (checked)
+                        this.props.onChange(this.props.option);
+                }
+
+
+                render() {
+                    return (
+                        <label>
+                            <input type="radio"
+                                checked={this.props.checked}
+                                onChange={this.handleChange}/> 
+                                {this.props.option}
+                        </label>
+                    )
+                }
+            };
+
+
+            ReactDOM.render(
+                <Questionnaire />,
+                document.getElementById('app')
+            );
+        </script>
+    </body>
+</html>
