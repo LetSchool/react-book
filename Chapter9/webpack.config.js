@@ -59,6 +59,9 @@ module.exports = {
             name: 'vendors' // Specify the common bundle's name.
         })
     ],
+    externals: {
+        config: JSON.stringify(require('config'))
+    },
 	resolve: {
         extensions: [".js", ".jsx"],
         alias: {

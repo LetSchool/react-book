@@ -1,4 +1,4 @@
-var config = require('../../config/default.js')
+const config = require('config')
 
 const getService = () => {
     return async (dispatch, getState) => {

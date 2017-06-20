@@ -1,4 +1,4 @@
-var config = require('../../config/default.js')
+const config = require('config')
 
 const entryList = (conditions) => {
     return async (dispatch, getState) => {
