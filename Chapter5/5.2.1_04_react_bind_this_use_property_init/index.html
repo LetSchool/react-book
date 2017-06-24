@@ -10,10 +10,10 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            class SayHello extends React.Component {
+            class Greeting extends React.Component {
                 constructor(props) {
                     super(props);
-                    this.state = {message: 'Hello!'};
+                    this.state = {message: 'Hello World!'};
                  }
         
                 handleClick = () => {
@@ -23,14 +23,14 @@
                 render() {
                     return (
                         <button onClick={this.handleClick}>
-                            Say Hello
+                            Try Me!
                         </button>
                     );
                 }
             }
 
             ReactDOM.render (
-                <SayHello />,
+                <Greeting />,
                 document.getElementById("app")
             );
         </script>

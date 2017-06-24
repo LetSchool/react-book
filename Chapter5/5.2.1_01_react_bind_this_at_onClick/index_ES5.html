@@ -11,9 +11,9 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            var SayHello = createReactClass({
+            var Greeting = createReactClass({
                 getInitialState: function () {
-                    return {message: 'Hello!'};
+                    return {message: 'Hello World!'};
                 },
                 handleClick: function () {
                     alert(this.state.message);
@@ -21,7 +21,7 @@
                 render: function () {
                     return (
                         <button onClick={this.handleClick}>
-                            Say Hello
+                            Try Me!
                         </button>
                     );
                 }
@@ -29,7 +29,7 @@
 
 
             ReactDOM.render (
-                <SayHello />,
+                <Greeting />,
                 document.getElementById("app")
             );
         </script>
