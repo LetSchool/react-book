@@ -10,12 +10,12 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            class Reservation extends React.Component {
+            class Account extends React.Component {
                 constructor(props) {
                     super(props);
                     this.state = {
-                        isGoing: true,
-                        numberOfGuests: 2
+                        haveMoney: true,
+                        howMuch: 100
                     };
 
                     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,27 +33,27 @@
                 handleSubmit(event) {
                     event.preventDefault();
 
-                    if (!this.state.isGoing)
-                        alert("Nobody is going.");
+                    if (!this.state.haveMoney)
+                        alert("You have no money.");
                     else
-                        alert(this.state.numberOfGuests + " guests will go.");
+                        alert("You have " + this.state.howMuch + " dollars.");
                 }
 
                 render() {
                     return (
                         <form onSubmit={this.handleSubmit}>
                             <label>
-                            Is going:
+                            Do you have money:
                             <input type="checkbox"
-                                   checked={this.state.isGoing}
-                                   onChange={this.handleInputChange.bind(this, 'isGoing')} />
+                                   checked={this.state.haveMoney}
+                                   onChange={this.handleInputChange.bind(this, 'haveMoney')} />
                             </label>
                             <br />
                             <label>
-                            Number of guests:
+                            How much:
                             <input type="number"
-                                   value={this.state.numberOfGuests}
-                                   onChange={this.handleInputChange.bind(this, 'numberOfGuests')} />
+                                   value={this.state.howMuch}
+                                   onChange={this.handleInputChange.bind(this, 'howMuch')} />
                             </label>
                             <input type="submit" value="Submit" />
                         </form>
@@ -62,7 +62,7 @@
             }
 
             ReactDOM.render (
-                <Reservation />,
+                <Account />,
                 document.getElementById("app")
             );
         </script>

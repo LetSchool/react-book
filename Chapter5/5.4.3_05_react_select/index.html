@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>React select menu (single)</title>
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        <script type="text/babel">
+class FavFruitForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: 'cherry'};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert('Your favorite fruit is ' + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                Pick your favorite fruit:
+                <select value={this.state.value}
+                        onChange={this.handleChange}>
+                    <option value="apple">Apple</option>
+                    <option value="banana">Banana</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="papaya">Papaya</option>
+                </select>
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+        );
+    }
+}
+
+            ReactDOM.render (
+                <FavFruitForm />,
+                document.getElementById("app")
+            );
+        </script>
+    </body>
+</html>

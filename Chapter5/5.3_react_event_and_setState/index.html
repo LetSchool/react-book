@@ -10,31 +10,31 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            class Toggle extends React.Component {
+            class OnOffSwitch extends React.Component {
                 constructor(props) {
                     super(props);
-                    this.state = {isToggleOn: true};
+                    this.state = {isOn: true};
 
                     this.handleClick = this.handleClick.bind(this);
                  }
 
                 handleClick(event) {
                     this.setState(prevState => ({
-                        isToggleOn: !prevState.isToggleOn
+                        isOn: !prevState.isOn
                     }));
                 }
 
                 render() {
                     return (
                         <button onClick={this.handleClick}>
-                            {this.state.isToggleOn ? 'ON' : 'OFF'}
+                            {this.state.isOn ? 'ON' : 'OFF'}
                         </button>
                     );
                 }
             }
 
             ReactDOM.render (
-                <Toggle />,
+                <OnOffSwitch />,
                 document.getElementById("app")
             );
         </script>

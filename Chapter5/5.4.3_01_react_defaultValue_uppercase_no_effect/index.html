@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>React controlled component - onSubmit</title>
+        <title>React uncontrolled component - to upper case fail</title>
         <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
         <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -11,28 +11,22 @@
         
         <script type="text/babel">
             class MyInputForm extends React.Component {
-                constructor(props) {
+                 constructor(props) {
                     super(props);
+                    this.state = {text: ''};
 
-                    this.handleSubmit = this.handleSubmit.bind(this);
-                }
+                    this.handleTextChange = this.handleTextChange.bind(this);
+                 }
 
-                handleSubmit(event) {
-                    const text = this.textInput.value;
-                    alert("Text: " + text + " is submitted");
-                    event.preventDefault();
+                handleTextChange(event) {
+                    this.setState({text: event.target.value.toUpperCase()});
                 }
 
                 render() {
                     return (
                         <div>
-                            <form onSubmit={this.handleSubmit}>
-                            <label>Text:
-                                <input type="text"
-                                       ref={(input) => this.textInput = input} />
-                            </label>
-                            <input type="submit" value="Submit" />
-                            </form>
+                            <input type="text"
+                             onChange={this.handleTextChange} />
                         </div>
                     );
                 }

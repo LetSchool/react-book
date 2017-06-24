@@ -10,30 +10,30 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            class FlavorForm extends React.Component {
+            class FavFruitForm extends React.Component {
                 constructor(props) {
                     super(props);
-                    this.state = {value: [ 'coconut' ]};
+                    this.state = {value: [ 'cherry' ]};
 
                     this.handleChange = this.handleChange.bind(this);
                     this.handleSubmit = this.handleSubmit.bind(this);
                 }
 
                 handleChange(event) {
-                    let selectedFlavors = [];
+                    let selectedFruits = [];
                     let sel = event.target;
 
                     for (let i = 0; i < sel.length; i++) {
                         let opt = sel.options[i];
                         if (opt.selected)
-                            selectedFlavors.push(opt.value);
+                            selectedFruits.push(opt.value);
                     }
 
-                    this.setState({value: selectedFlavors});
+                    this.setState({value: selectedFruits});
                 }
 
                 handleSubmit(event) {
-                    alert('Your favorite flavors are ' + this.state.value);
+                    alert('Your favorite fruits are ' + this.state.value);
                     event.preventDefault();
                 }
 
@@ -41,14 +41,14 @@
                     return (
                         <form onSubmit={this.handleSubmit}>
                             <label>
-                            Pick your favorite La Croix flavors:
+                            Pick your favorite fruit(s):
                             <select multiple={true}
                                     value={this.state.value}
                                     onChange={this.handleChange}>
-                                <option value="grapefruit">Grapfruit</option>
-                                <option value="lime">Lime</option>
-                                <option value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
+                                <option value="apple">Apple</option>
+                                <option value="banana">Banana</option>
+                                <option value="cherry">Cherry</option>
+                                <option value="papaya">Papaya</option>
                             </select>
                             </label>
                             <input type="submit" value="Submit" />
@@ -58,7 +58,7 @@
             }
 
             ReactDOM.render (
-                <FlavorForm />,
+                <FavFruitForm />,
                 document.getElementById("app")
             );
         </script>

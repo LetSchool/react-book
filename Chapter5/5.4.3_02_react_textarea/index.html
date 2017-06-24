@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>React select menu (single)</title>
+        <title>React textarea</title>
         <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
         <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -10,45 +10,41 @@
         <div id="app"></div>
         
         <script type="text/babel">
-            class FlavorForm extends React.Component {
+            class NameForm extends React.Component {
                 constructor(props) {
                     super(props);
-                    this.state = {value: 'coconut'};
+                    this.state = { value: 'input here' };
 
                     this.handleChange = this.handleChange.bind(this);
                     this.handleSubmit = this.handleSubmit.bind(this);
-                }
+                 }
 
                 handleChange(event) {
-                    this.setState({value: event.target.value});
+                    this.setState({ value: event.target.value });
                 }
 
                 handleSubmit(event) {
-                    alert('Your favorite flavor is ' + this.state.value);
+                    alert("Your name was submitted: " + this.state.value);
                     event.preventDefault();
                 }
 
                 render() {
                     return (
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                            Pick your favorite La Croix flavor:
-                            <select value={this.state.value}
-                                    onChange={this.handleChange}>
-                                <option value="grapefruit">Grapfruit</option>
-                                <option value="lime">Lime</option>
-                                <option value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
-                            </select>
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                            <label>Your Name:
+                                <textarea value={this.state.value}
+                                          onChange={this.handleChange} />
                             </label>
                             <input type="submit" value="Submit" />
-                        </form>
+                            </form>
+                        </div>
                     );
                 }
             }
 
             ReactDOM.render (
-                <FlavorForm />,
+                <NameForm />,
                 document.getElementById("app")
             );
         </script>
